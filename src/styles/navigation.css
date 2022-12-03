@@ -1,0 +1,280 @@
+*{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}
+nav{
+    background-color: var(--nav-color);
+    display: flex;
+    height: 9vh;
+    align-items: center;
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+.hidden{
+    display: none;
+}
+.logo{
+    background: no-repeat url(../assets/wettit-logo.svg);
+    background-size: contain;
+    background-position: center center;
+    width: 3.5vw;
+    height: 6vh;
+    margin-left: 25px;
+}
+.text-logo{
+    background: no-repeat url(../assets/text-logo.svg);
+    background-size: contain;
+    background-position: center center;
+    width: 100px;
+    height: 4vh;
+}
+:root.light-mode .text-logo{
+    background: no-repeat url(../assets/text-logo-light.svg);
+    background-size: contain;
+    background-position: center center;
+    width: 100px;
+    height: 4vh;
+}
+.dropdown-menu{
+    position: relative;
+    display: flex;
+    height: 75%;
+    align-items: center;
+    width: 250px;
+    margin-left: 25px;
+    border-radius: 5px;
+}
+.dropdown-menu>img:first-of-type{
+    margin-left: 10px;
+    height: 75%;
+}
+.dropdown-menu p{
+    margin-left: 10px;
+}
+.dropdown-menu>img:last-of-type{
+    margin-left: auto;
+    margin-right: 5%;
+}
+.sub-filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.sub-filter input{
+    border: none;
+    background-color: #353535;
+    height: 25px;
+    outline: 1px var(--nav-border-color) solid;
+    color: white;
+    padding-left: 5px;
+    width: 85%;
+    margin-bottom: 5%;
+}
+:root.light-mode .sub-filter input{
+    background-color: #DFDFDF;
+}
+.dropdown-container{
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    background-color: var(--nav-color);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px var(--nav-border-color) solid;
+    border-top: none;
+    width: 250px;
+}
+.dropdown-container>p{
+    color: #6d6d6d;
+    font-size: 12px;
+    margin-bottom: 5%;
+    margin-left: 25px;
+}
+.dropped-subwettit{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
+.dropped-subwettit div{
+    width: 25px;
+    height: 25px;
+    margin-left: 25px;
+    border-radius: 300px;
+}
+.searchbar{
+    display: flex;
+    margin-left: 60px;
+    background-color: #DFDFDF;
+    border-radius: 20px;
+    gap: 10px;
+}
+.searchbar label{
+    align-self: center;
+    margin-left: 10px;
+    display: flex;
+    align-content: center;
+}
+.searchbar label:hover{
+    cursor: text;
+}
+.searchbar input{
+    background-color: transparent;
+    border: none;
+    width: 25vw;
+    height: 30px;
+    border-radius: 20px;
+    color: #000000;
+}
+.searchbar input::placeholder{
+    color: #000000;
+    opacity: 1;
+}
+.nav-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+}
+.popular-button{
+    background: no-repeat url(../assets/rise-outlined.svg);
+    background-size: contain;
+    background-position: center center;
+}
+.chat-button{
+    background: no-repeat url(../assets/chat-dots.svg);
+    background-size: contain;
+    background-position: center center;
+}
+.notification-button{
+    background: no-repeat url(../assets/bell-outline.svg);
+    background-size: contain;
+    background-position: center center;
+    margin-left: 5px;
+}
+.new-button{
+    background: no-repeat url(../assets/add.svg);
+    background-size: contain;
+    background-position: center center;
+    margin-left: 5px;
+}
+.nav-button-container{
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+.nav-profile{
+    position: relative;
+    display: flex;
+    margin-left: auto;
+    margin-right: 25px;
+    border-radius: 3px;
+}
+.nav-profile.dropped{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    outline: 1px rgba(128, 128, 128, 0.4) solid;
+}
+.profile-picture{
+    width: 30px;
+    height: 30px;
+    border-radius: 300px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+.profile-picture img{
+    max-width: 125%;
+    height: 125%;
+}
+.profile-text{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.drops-icon{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: no-repeat url(../assets/water-drop.svg);
+    background-size: contain;
+    background-position: center center;
+}
+.drop-count{
+    color: #8b8b8b;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.profile-dropdown{
+    display: inline-block;
+    width: 16px;
+    height: 8px;
+    background: no-repeat url(../assets/dropdown-arrow.svg);
+    background-size: contain;
+    background-position: center center;
+    align-self: center;
+    margin-left: 25px;
+}
+:root.light-mode .profile-dropdown{
+    background: no-repeat url(../assets/dropdown-arrow-light.svg);
+    background-size: contain;
+    background-position: center center;
+}
+.profile-dropdown-container{
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    background-color: var(--nav-color);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px var(--nav-border-color) solid;
+    border-top: none;
+    width: 100%;
+}
+.profile-dropdown-container>div{
+    display: flex;
+    align-items: center;
+}
+.profile-dropdown-container .dark-mode-switch-active{
+    background: no-repeat url(../assets/dark-mode.svg);
+    background-size: contain;
+    background-position: center center;
+    width: 2rem;
+    height: 2rem;
+}
+.profile-dropdown-container .dark-mode-switch-inactive{
+    background: no-repeat url(../assets/light-mode.svg);
+    background-size: contain;
+    background-position: center center;
+    width: 2rem;
+    height: 2rem;
+}
+
+
+/* hover animations */
+.dropdown-menu:hover{
+    outline: 1px var(--nav-border-color) solid;
+    cursor: pointer;
+}
+.searchbar:hover{
+    outline: 2px #038bb8 solid;
+}
+.nav-button:hover{
+    cursor: pointer;
+    background-color: #8b8b8b31;
+}
+.nav-profile:hover{
+    cursor: pointer;
+    outline: 1px rgba(128, 128, 128, 0.4) solid;
+}
+.dropped-subwettit:hover{
+    background-color: #8b8b8b31;
+}
+.profile-dropdown-container>div:hover{
+    background-color: #8b8b8b31;
+}

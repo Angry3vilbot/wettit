@@ -1,0 +1,47 @@
+:root{
+    --body-bg-color: black;
+    --main-bg-color: #1a1a1b;
+    --secondary-color: #585858;
+    --nav-color: #272727;
+    --nav-border-color: rgba(128, 128, 128, 0.4);
+    --column-bg-color: #121213;
+    --vote-hover-bg-color: #232325;
+    --post-hover-bg-color: #343536;
+    --post-btn-hover-color: #2d2d2f;
+}
+*::selection{
+    background-color: #00BEFE
+}
+.App{
+    display: grid;
+}
+:root.light-mode{
+    --nav-color: #f6f7f8;
+    --body-bg-color: #dae0e6;
+    --main-bg-color: #ffffff;
+    --secondary-color: #585858;
+    --nav-border-color: rgba(128, 128, 128, 0.4);
+    --column-bg-color: #f7f9fa;
+    --vote-hover-bg-color: #b1b1ca5d;
+    --post-hover-bg-color: #b1b1ca5d;
+    --post-btn-hover-color: #e7e7e7;
+}
+:root.light-mode *{
+    color: #222222;
+}
+.main-container{
+    display: grid;
+    padding-top: calc(9vh + 30px);
+}
+.main-container.card{
+    gap: 20px;
+    grid-template-columns: 65% 35%;
+    width: 70vw;
+    justify-self: center;
+}
+.main-container.classic, .main-container.compact{
+    gap: 20px;
+    grid-template-columns: 75% 25%;
+    width: 95vw;
+    justify-self: center;
+}

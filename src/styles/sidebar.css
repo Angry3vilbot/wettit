@@ -1,0 +1,99 @@
+.top-card{
+    background-color: var(--main-bg-color);
+    color: white;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    outline: 1px solid #585858;
+}
+.caption-container{
+    background: no-repeat url(../assets/top-banner-background.png);
+    background-size: auto;
+    background-position: center center;
+    display: grid;
+    height: 80px;
+    align-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+:root .caption-container h3{
+    text-align: center;
+    color: white;
+}
+.leaderboard-item{
+    display: flex;
+    gap: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+.leaderboard-item:nth-last-child(2), :root.light-mode .leaderboard-item:nth-last-child(2){
+    border-bottom: none;
+}
+:root.light-mode .leaderboard-item{
+    border-bottom: 1px solid #cccccc;
+}
+.leaderboard-item-image{
+    width: 25px;
+    height: 25px;
+    border-radius: 300px;
+}
+.leaderboard-view-all-btn{
+    display: flex;
+    background-color: #D9D9D9;
+    color: black;
+    font-weight: 700;
+    border-radius: 20px;
+    width: 80%;
+    height: 30px;
+    margin-top: 30px;
+    margin-left: 10%;
+    justify-content: center;
+    align-items: center;
+}
+.side-menu{
+    position: sticky;
+    top: 11%;
+    display: grid;
+    background-color: var(--main-bg-color);
+    color: white;
+    outline: 1px solid #585858;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+:root.light-mode .side-menu, :root.light-mode .top-card{
+    outline: 1px solid #cccccc;
+}
+.side-menu>div:last-of-type{
+    border-bottom: none;
+}
+.side-menu-section{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    border-bottom: 1px solid white;
+    row-gap: 10px;
+    padding-top: 10px;
+    width: 90%;
+    justify-self: center;
+}
+.side-menu-section:nth-of-type(3){
+    grid-template-columns: 100%;
+}
+.side-menu-section p{
+    font-size: 12px;
+}
+.side-menu-section p:last-of-type{
+    padding-bottom: 10px;
+}
+
+/* animations */
+.leaderboard-view-all-btn:hover{
+    background-color: #c9c9c9;
+    cursor: pointer;
+}
+.leaderboard-view-all-btn:active{
+    background-color: #bdbdbd;
+}
+.leaderboard-item p:hover{
+    cursor: pointer;
+}

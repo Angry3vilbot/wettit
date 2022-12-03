@@ -1,0 +1,8 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+html{
+  background-color: var(--body-bg-color);
+}
