@@ -106,7 +106,7 @@ function Navigation({ darkMode, setDarkMode}) {
   }
   return (
     <nav>
-      <a href='/' style={{display: 'flex', alignItems: 'center'}}>
+      <a href='/wettit/' style={{display: 'flex', alignItems: 'center'}}>
       <div className='logo'></div>
       <div className='text-logo'></div>
       </a>
