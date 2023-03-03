@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import '../styles/feed.css'
 import hotActive from '../assets/hot-active.svg'
 import hotInactive from '../assets/hot-inactive.svg'
@@ -12,22 +12,20 @@ import { useEffect } from 'react'
 import Posts from './Posts'
 
 function Feed({ postStyleState, setPostStyleState }) {
-    let [bestActiveState, setBestActiveState] = useState(true)
-    let [hotActiveState, setHotActiveState] = useState(false)
-    let [recentActiveState, setRecentActiveState] = useState(false)
-    let [topActiveState, setTopActiveState] = useState(false)
+    //? This sucks lmao. Should be change to a single state
+    const [bestActiveState, setBestActiveState] = useState(true)
+    const [hotActiveState, setHotActiveState] = useState(false)
+    const [recentActiveState, setRecentActiveState] = useState(false)
+    const [topActiveState, setTopActiveState] = useState(false)
+
+    const postStyleDropdown = useRef<HTMLDivElement>(null)
+    const postStyleSwitch = useRef<HTMLDivElement>(null)
+    // const postStyleDropdown = useRef(null)
+    // const postStyleDropdown = useRef(null)
+
+
     useEffect(()=>{changeFeedSwitchEventListeners()}, [])
     
-    function undoDropDown(){
-        document.querySelector('[class="post-style-dropdown"]').classList.add('hidden')
-        document.querySelector('[class="feed-post-style-switch dropped"]').classList.remove('dropped')
-    }
-    function dropDown(){
-        if(document.querySelector('[class="post-style-dropdown hidden"]') != null){
-          document.querySelector('[class="post-style-dropdown hidden"]').classList.remove('hidden')
-        }
-        document.querySelector('[class="feed-post-style-switch"]').classList.add('dropped')
-    }
     function checkDropEvent(item){
         if(item.children.length > 2){
           return false
@@ -36,23 +34,29 @@ function Feed({ postStyleState, setPostStyleState }) {
     }
     function handleDropDown(ev){
         if(!checkDropEvent(ev.target.parentElement)){
-          if(!document.querySelector('[class="post-style-dropdown hidden"]')){
-            undoDropDown()
-          }
+            if(!document.querySelector('[class="post-style-dropdown hidden"]')){
+                
+                return
+            }
           else{
-            dropDown()
+            postStyleDropdown.current?.classList.remove('hidden')
+            postStyleSwitch.current?.classList.add('dropped')
           }
         }
     }
     function changePostStyle(ev, style){
         if(!ev.currentTarget.classList.contains('selected')){
+            //? Possibly can only be done like this?
             ev.currentTarget.parentElement.querySelector('[class="post-style-dropdown-item selected"]').classList.remove('selected')
             ev.currentTarget.classList.add('selected')
-            undoDropDown()
+            postStyleDropdown.current?.classList.add('hidden')
+            postStyleSwitch.current?.classList.remove('dropped')
             setPostStyleState((ev.currentTarget.querySelector('p').innerHTML).toLowerCase())
             console.log(postStyleState)
         }
     }
+
+    //? Will need to be changed according to how I will change the useState
     function changeFeed(ev){
         let caller = ev.currentTarget
         let previous = caller.parentElement.querySelector('[class="feed-switch active"]')
@@ -91,7 +95,7 @@ function Feed({ postStyleState, setPostStyleState }) {
     function changeFeedSwitchEventListeners(){
         let active = document.querySelector('[class="feed-switch active"]')
         let other = document.querySelectorAll('[class="feed-switch"]')
-        active.removeEventListener('click', changeFeed)
+        active?.removeEventListener('click', changeFeed)
         other.forEach((item) => {
             item.removeEventListener('click', changeFeed)
             item.addEventListener('click', changeFeed)
@@ -118,10 +122,10 @@ function Feed({ postStyleState, setPostStyleState }) {
                 <h3>Top</h3>
             </div>
         </div>
-        <div className='feed-post-style-switch' onClick={handleDropDown}>
+        <div className='feed-post-style-switch' onClick={handleDropDown} ref={postStyleSwitch}>
             <div className={postStyleState}></div>
             <div></div>
-            <div className='post-style-dropdown hidden'>
+            <div className='post-style-dropdown hidden' ref={postStyleDropdown}>
                 <div className='post-style-dropdown-item selected' onClick={(ev) => changePostStyle(ev, 'card')}>
                     <div></div>
                     <p>Card</p>

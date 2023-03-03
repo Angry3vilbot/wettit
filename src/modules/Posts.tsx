@@ -15,6 +15,7 @@ type Props = {
 
 function Posts({ postStyle }: Props) {
   function revealFullPost(ev){
+    //? Future me here, for now I have no idea if there is a better way of doing it, will think about it later.
     //  content     fullscreen-btn footer        post-container
     let content = ev.currentTarget.parentElement.parentElement.parentElement.querySelector('[class="post-content"]')
     if(content.style.display != 'block'){
@@ -24,13 +25,17 @@ function Posts({ postStyle }: Props) {
       content.style = null
     }
   }
+
   function vote(ev, type : string){
     if(type === 'up'){
+      //? Instead of this whole mess, I will be using API calls to an external Express API. For now I will clean this up a little bit
       if(!ev.target.parentElement.querySelector('[class="upvote upvote-active"]')){
         let score = ev.target.parentElement.querySelector('[class="post-score"]')
+
         if(!score.innerHTML.includes('k')){
           score.innerHTML = parseInt(score.innerHTML) + 1
         }
+
         ev.target.parentElement.querySelector('[class="upvote"]').classList.add('upvote-active')
         if(ev.target.parentElement.querySelector('[class="downvote downvote-active"]')){
           if(!score.innerHTML.includes('k')){
@@ -71,23 +76,31 @@ function Posts({ postStyle }: Props) {
     }
     else throw 'Vote type error'
   }
+  
   function generatePosts(){
     let postNameArray : Array<string> = ['Post name the first one', 'I love Trains!', 'TESTESTESTESt', 'video tag attempt 2',
     'He adds something different to the team.', "Orange juice is much better with the pulp in it. I am a vegan.", 
     "If I had more money, I could move to a bigger house.", "Oysters are slimy.", 
     "Today, I met a vampire who liked to eat beets.", "You know what I mean.", "Very good job, sweetheart!", 
     "Am I in the White House?", "This is the biggest party I've ever been to."]
+
     let usernameArray : Array<string> = ['Angry3vilbot', 'mikebalaker', 'Midvey', 'masterbaiter', 
     'Fusecrush', 'Slaughterhaus88', 'sexNOW', 'bruhmomentlover67', 'Tweedlex', 'Robotnik', 'RowanTree', 'marling111', '2Pelfox4u']
+
     let subwettitArray : Array<string> = ['water', 'carbonateddrinks', 'oceans', 'rivers', 'oceans', 'seas', 
     'rivers', 'carbonateddrinks', 'seas', 'rivers', 'water', 'carbonateddrinks', 'oceans']
+
     let subwettitLogoArray : Array<string> = [water, carbonated, oceans, rivers, oceans, seas, rivers, carbonated,
     seas, rivers, water, carbonated, oceans]
+
     let timeArray : Array<Date> = [new Date(), new Date('July 20, 69 20:17:40 GMT+00:00'), new Date('10 september 2005'), new Date('11 november 1444'), new Date('18 october 2021'),
     new Date('29 november 2022'), new Date('30 november 2022'), new Date('1 december 2022'), new Date('28 november 2020'), new Date('28 november 2022'), new Date('28 november 2019'), new Date('28 november 2018'),
     new Date('28 november 2017')]
+
     let flairColorArray : Array<string> = ['green', 'blue', 'magenta', '#00BEFE']
+
     let flairTextArray : Array<string> = ['longFlairNameHere1244567423', 'image', 'meme', 'video']
+
     let contentArray : Array<string | JSX.Element> = [`Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Dolorem magni ex laboriosam. Porro quibusdam facilis architecto quaerat, alias officia sequi dolore delectus 
     error nisi! Modi temporibus recusandae nobis dicta obcaecati.`, <img src={testImage}></img>, <iframe src={testGif}></iframe>, 
@@ -116,6 +129,8 @@ function Posts({ postStyle }: Props) {
         return `${newnum[0]}${newnum[1]}${newnum[2]}k`
       }
     }
+
+    //? To be removed - will use luxon in API for time display/conversion
     function convertTime(time:Date) {
       let check = new Date().getTime() - new Date(time).getTime()
       if(check < 60000){
@@ -132,6 +147,8 @@ function Posts({ postStyle }: Props) {
       }
       return `${Math.floor(check / 31536000000)} years`
     }
+
+    //? Will need to probably be completely redone, based on the data from the API, as this looks kinda messy
     postNameArray.forEach((title) => {
       let style = {
         background: `center / contain no-repeat url(${subwettitLogoArray[postNameArray.indexOf(title)]})`
@@ -163,6 +180,7 @@ function Posts({ postStyle }: Props) {
                 <div style={flair}><p>{flairTextArray[postNameArray.indexOf(title)]}</p></div>
               </div>
               <div className='post-content'>{contentArray[postNameArray.indexOf(title)]}</div>
+              {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
               <div className='post-footer'>
                 <div className='post-fullscreen-button-container' onClick={revealFullPost}>
                   <div></div>
@@ -185,15 +203,19 @@ function Posts({ postStyle }: Props) {
           </div>)
           break
         case 'object':
+          //? What is this and why is it unused?
           let miniatureImageStyle = {
             background: `center / contain no-repeat url(${contentArray[postNameArray.indexOf(title)]})`
           }
-          resultArray.push(<div className='post file-post' key={title}>
+
+          resultArray.push(
+          <div className='post file-post' key={title}>
             <section className='upvote-column'>
               <div className='upvote' onClick={(ev) => vote(ev, 'up')}></div>
                 <p className='post-score'>{convertScore(scoreArray[postNameArray.indexOf(title)])}</p>
               <div className='downvote' onClick={(ev) => vote(ev, 'down')}></div>
             </section>
+            
             <section className='post-content-container'>
               <div className='post-content-info-bar'>
                 <div className='post-subwettit-info'>
@@ -203,14 +225,18 @@ function Posts({ postStyle }: Props) {
                 <div className='post-user-info'>
                   <p>Posted by <span>u/{usernameArray[postNameArray.indexOf(title)]}</span> {convertTime(timeArray[postNameArray.indexOf(title)])} ago</p>
                 </div>
-               </div>
+              </div>
+              
               <div className='post-classic-miniature'>{contentArray[postNameArray.indexOf(title)]}</div>
               <div className='post-title'>
                 <h2>{title}</h2>
                 <div style={flair}><p>{flairTextArray[postNameArray.indexOf(title)]}</p></div>
               </div>
+
               <div className='post-content'>{contentArray[postNameArray.indexOf(title)]}</div>
+
               <div className='post-footer'>
+                {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
                 <div className='post-fullscreen-button-container' onClick={revealFullPost}>
                   <div></div>
                   <div></div>
@@ -234,6 +260,7 @@ function Posts({ postStyle }: Props) {
     })
     return resultArray
   }
+
   return (
     <div className={`posts-container ${postStyle}`}>
       {generatePosts()}
