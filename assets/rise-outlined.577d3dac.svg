@@ -6,7 +6,7 @@
    version="1.1"
    id="svg4"
    sodipodi:docname="rise-outlined.svg"
-   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,18 +24,18 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      showguides="true"
-     inkscape:zoom="256"
-     inkscape:cx="-0.91210938"
-     inkscape:cy="-0.31054688"
-     inkscape:window-width="1366"
-     inkscape:window-height="706"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:zoom="0.5"
+     inkscape:cx="-295"
+     inkscape:cy="525"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4" />
   <path
      fill="currentColor"
      d="m917 211.1l-199.2 24c-6.6.8-9.4 8.9-4.7 13.6l59.3 59.3l-226 226l-101.8-101.7c-6.3-6.3-16.4-6.2-22.6 0L100.3 754.1a8.03 8.03 0 0 0 0 11.3l45 45.2c3.1 3.1 8.2 3.1 11.3 0L433.3 534L535 635.7c6.3 6.2 16.4 6.2 22.6 0L829 364.5l59.3 59.3a8.01 8.01 0 0 0 13.6-4.7l24-199.2c.7-5.1-3.7-9.5-8.9-8.8z"
      id="path2"
-     style="fill:#00cfc8;fill-opacity:1" />
+     style="fill:#00befe;fill-opacity:1" />
 </svg>
