@@ -1,0 +1,60 @@
+.main-container.compact .posts-container {
+  gap: 2px;
+}
+.main-container.compact .post:not(:first-of-type) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.main-container.compact .post {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 50px;
+}
+.main-container.compact .post-footer {
+  display: none;
+}
+.post-classic-miniature {
+  display: none;
+}
+.main-container.compact .post-content-container {
+  display: grid;
+  grid-template-areas:
+    "title"
+    "info"
+    "content";
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+.main-container.compact .post-title {
+  grid-area: title;
+}
+.main-container.compact .post-content-info-bar {
+  grid-area: info;
+  height: fit-content;
+}
+.main-container.compact .post-content {
+  display: none;
+  grid-area: content;
+}
+.main-container.compact .upvote-column {
+  border-radius: 0;
+  align-self: stretch;
+  width: 10%;
+  min-width: 10%;
+  flex-direction: row;
+  height: 50px;
+  gap: 5px;
+  font-size: 14px;
+}
+.main-container.compact .post-content {
+  justify-self: flex-start;
+}
+.main-container.compact .upvote,
+.main-container.compact .downvote {
+  width: 30px;
+  height: 30px;
+  margin-top: 0;
+}
+.main-container.compact .post-subwettit-image {
+  display: none;
+}
