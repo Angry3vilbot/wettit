@@ -1,6 +1,10 @@
 import express from 'express';
+import { createPlaceholderPosts } from '../controllers/postController';
 
 const router = express.Router();
+
+// POST placeholder posts
+router.post('/createplaceholders', createPlaceholderPosts)
 
 // GET all posts made in the last 8 hours and sort them by upvote count
 router.get('/best', function(req, res, next) {

@@ -7,6 +7,8 @@ import logger from 'morgan';
 import mongoose from "mongoose";
 
 import postRouter from './routes/post';
+import userRouter from './routes/user';
+import subwettitRouter from './routes/subwettit';
 
 dotenv.config()
 
@@ -25,6 +27,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/posts', postRouter);
+app.use('/users', userRouter);
+app.use('/subwettits', subwettitRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next: NextFunction) {
