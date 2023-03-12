@@ -9,6 +9,6 @@ const SubwettitSchema = new Schema({
     moderators: { type: Array }
 }, { versionKey: false })
 
-const model = Model("Subwettit", SubwettitSchema, "Subwettits")
+const SubwettitModel = Model("Subwettit", SubwettitSchema, "Subwettits")
 
-export default model
+export default SubwettitModel

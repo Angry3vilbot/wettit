@@ -7,9 +7,10 @@ const PostSchema = new Schema({
     author: { type: Schema.Types.ObjectId, required: true },
     date: { type: Date, required: true },
     score: { type: Number, required: true },
-    comments: { type: Array }
+    comments: { type: Array },
+    subwettit: { type: Schema.Types.ObjectId, required: true }
 }, { versionKey: false })
 
-const model = Model("Post", PostSchema, "Posts")
+const PostModel = Model("Post", PostSchema, "Posts")
 
-export default model
+export default PostModel

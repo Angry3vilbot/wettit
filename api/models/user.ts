@@ -8,9 +8,10 @@ const UserSchema = new Schema({
     creation_date: { type: Date, required: true },
     drops: { type: Number, required: true },
     posts: { type: Array },
-    comments: { type: Array }
+    comments: { type: Array },
+    followedSubwettits: { type: Array }
 }, { versionKey: false })
 
-const model = Model("User", UserSchema, "Users")
+const UserModel = Model("User", UserSchema, "Users")
 
-export default model
+export default UserModel

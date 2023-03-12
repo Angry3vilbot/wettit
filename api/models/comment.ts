@@ -10,6 +10,6 @@ const CommentSchema = new Schema({
     thread_level: { type: Number }
 }, { versionKey: false })
 
-const model = Model("Comment", CommentSchema, "Comments")
+const CommentModel = Model("Comment", CommentSchema, "Comments")
 
-export default model
+export default CommentModel

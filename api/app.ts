@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import dotenv from 'dotenv'
-import express, { NextFunction } from 'express';
+import express, { NextFunction, Response, Request } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -14,6 +14,7 @@ const mongoDB = process.env.MONGO_URI
 mongoose.connect(mongoDB!)
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Connection Error: '))
+db.once('connection', console.log.bind(console, 'connected'))
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use(function(req, res, next: NextFunction) {
 });
 
 // error handler
-app.use(function(err: any, req: any, res: any, next: NextFunction) {
+app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -39,6 +40,11 @@ app.use(function(err: any, req: any, res: any, next: NextFunction) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+const port = 8000
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
 module.exports = app;
