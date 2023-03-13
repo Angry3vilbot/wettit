@@ -1,5 +1,5 @@
 import express from 'express';
-import { createPlaceholderPosts } from '../controllers/postController';
+import { createPlaceholderPosts, getBestPosts } from '../controllers/postController';
 
 const router = express.Router();
 
@@ -7,9 +7,7 @@ const router = express.Router();
 router.post('/createplaceholders', createPlaceholderPosts)
 
 // GET all posts made in the last 8 hours and sort them by upvote count
-router.get('/best', function(req, res, next) {
-  
-});
+router.get('/best', getBestPosts);
 
 // GET all posts and sort them by age AND upvote count via a formula
 router.get('/hot', function(req, res, next) {

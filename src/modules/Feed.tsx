@@ -12,11 +12,7 @@ import { useEffect } from 'react'
 import Posts from './Posts'
 
 function Feed({ postStyleState, setPostStyleState }) {
-    //? This sucks lmao. Should be change to a single state
-    const [bestActiveState, setBestActiveState] = useState(true)
-    const [hotActiveState, setHotActiveState] = useState(false)
-    const [recentActiveState, setRecentActiveState] = useState(false)
-    const [topActiveState, setTopActiveState] = useState(false)
+    const [sortBy, setSortBy] = useState('best')
 
     const postStyleDropdown = useRef<HTMLDivElement>(null)
     const postStyleSwitch = useRef<HTMLDivElement>(null)
@@ -24,7 +20,10 @@ function Feed({ postStyleState, setPostStyleState }) {
     // const postStyleDropdown = useRef(null)
 
 
-    useEffect(()=>{changeFeedSwitchEventListeners()}, [])
+    useEffect(()=>{
+        document.querySelectorAll('.feed-switch').forEach((item) => item.addEventListener('click', changeFeed))
+        document.querySelectorAll('.feed-switch active').forEach((item) => item.addEventListener('click', changeFeed))
+    }, [])
     
     function checkDropEvent(item){
         if(item.children.length > 2){
@@ -35,7 +34,6 @@ function Feed({ postStyleState, setPostStyleState }) {
     function handleDropDown(ev){
         if(!checkDropEvent(ev.target.parentElement)){
             if(!document.querySelector('[class="post-style-dropdown hidden"]')){
-                
                 return
             }
           else{
@@ -44,100 +42,74 @@ function Feed({ postStyleState, setPostStyleState }) {
           }
         }
     }
-    function changePostStyle(ev, style){
+    function changePostStyle(ev, style: String){
         if(!ev.currentTarget.classList.contains('selected')){
             //? Possibly can only be done like this?
             ev.currentTarget.parentElement.querySelector('[class="post-style-dropdown-item selected"]').classList.remove('selected')
             ev.currentTarget.classList.add('selected')
             postStyleDropdown.current?.classList.add('hidden')
             postStyleSwitch.current?.classList.remove('dropped')
-            setPostStyleState((ev.currentTarget.querySelector('p').innerHTML).toLowerCase())
-            console.log(postStyleState)
+            setPostStyleState(style)
         }
     }
 
-    //? Will need to be changed according to how I will change the useState
     function changeFeed(ev){
         let caller = ev.currentTarget
         let previous = caller.parentElement.querySelector('[class="feed-switch active"]')
         switch(caller.querySelector('img').className){
             case 'best-img':
-                setBestActiveState(true)
+                setSortBy('best')
                 break
             case 'hot-img':
-                setHotActiveState(true)
+                setSortBy('hot')
                 break
             case 'recent-img':
-                setRecentActiveState(true)
+                setSortBy('recent')
                 break
             case 'top-img':
-                setTopActiveState(true)
-                break
-        }
-        switch(previous.querySelector('img').className){
-            case 'best-img':
-                setBestActiveState(false)
-                break
-            case 'hot-img':
-                setHotActiveState(false)
-                break
-            case 'recent-img':
-                setRecentActiveState(false)
-                break
-            case 'top-img':
-                setTopActiveState(false)
+                setSortBy('top')
                 break
         }
         caller.classList.add('active')
         previous.classList.remove('active')
-        changeFeedSwitchEventListeners()
-    }
-    function changeFeedSwitchEventListeners(){
-        let active = document.querySelector('[class="feed-switch active"]')
-        let other = document.querySelectorAll('[class="feed-switch"]')
-        active?.removeEventListener('click', changeFeed)
-        other.forEach((item) => {
-            item.removeEventListener('click', changeFeed)
-            item.addEventListener('click', changeFeed)
-        })
     }
   return (
     <div className='main-section'>
     <div className='feed-container'>
         <div className='feed-switch-container'>
-            <div className='feed-switch active'>
-                <img className='best-img' src={bestActiveState ? bestActive : bestInactive}></img>
+            <button className='feed-switch active'>
+                <img className='best-img' src={sortBy === 'best' ? bestActive : bestInactive}></img>
                 <h3>Best</h3>
-            </div>
-            <div className='feed-switch'>
-                <img className='hot-img' src={hotActiveState ? hotActive : hotInactive}></img>
+            </button>
+            <button className='feed-switch'>
+                <img className='hot-img' src={sortBy === 'hot' ? hotActive : hotInactive}></img>
                 <h3>Hot</h3>
-            </div>
-            <div className='feed-switch'>
-                <img className='recent-img' src={recentActiveState ? recentActive : recentInactive}></img>
+            </button>
+            <button className='feed-switch'>
+                <img className='recent-img' src={sortBy === 'recent' ? recentActive : recentInactive}></img>
                 <h3>New</h3>
-            </div>
-            <div className='feed-switch'>
-                <img className='top-img' src={topActiveState ? topActive : topInactive}></img>
+            </button>
+            <button className='feed-switch'>
+                <img className='top-img' src={sortBy === 'top' ? topActive : topInactive}></img>
                 <h3>Top</h3>
-            </div>
+            </button>
         </div>
         <div className='feed-post-style-switch' onClick={handleDropDown} ref={postStyleSwitch}>
             <div className={postStyleState}></div>
-            <div></div>
+            <i></i>
             <div className='post-style-dropdown hidden' ref={postStyleDropdown}>
-                <div className='post-style-dropdown-item selected' onClick={(ev) => changePostStyle(ev, 'card')}>
+                <button className='post-style-dropdown-item selected' onClick={(ev) => changePostStyle(ev, 'card')}>
                     <div></div>
                     <p>Card</p>
-                </div>
-                <div className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'classic')}>
+                </button>
+                <button className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'classic')}>
                     <div></div>
                     <p>Classic</p>
-                </div>
-                <div className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'compact')}>
+                </button>
+                <button className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'compact')}>
                     <div></div>
                     <p>Compact</p>
-                </div>
+                </button>
             </div>
         </div>
     </div>

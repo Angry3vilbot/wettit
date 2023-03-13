@@ -8,7 +8,9 @@ const PostSchema = new Schema({
     date: { type: Date, required: true },
     score: { type: Number, required: true },
     comments: { type: Array },
-    subwettit: { type: Schema.Types.ObjectId, required: true }
+    subwettit: { type: Schema.Types.ObjectId, required: true },
+    flair: { type: String },
+    flairColor: { type: String }
 }, { versionKey: false })
 
 const PostModel = Model("Post", PostSchema, "Posts")

@@ -7,11 +7,11 @@ export async function getBestPosts(req: Request, res: Response, next: NextFuncti
     TODO: For now, it looks for ALL posts in the DB, later on I will make it look for those posts, whose subwettit value is included
     TODO: in the followedSubwettits array of the current user
     */
-    // Finds all posts made within the last 8 hours
+    // Find all posts made within the last 8 hours
     const posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 28800000} }).exec()
     // Sort the posts by score
     posts.sort((a, b) => a.score > b.score ? 1 : -1)
-
+    console.log(posts)
     res.json(posts)
 };
 

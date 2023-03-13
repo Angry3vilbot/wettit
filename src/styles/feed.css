@@ -59,14 +59,15 @@
   background-size: contain;
   background-position: center center;
 }
-.feed-post-style-switch > div:nth-of-type(2) {
+.feed-post-style-switch > i:nth-of-type(1) {
+  display: block;
   width: 16px;
   height: 8px;
   background: no-repeat url(../assets/dropdown-arrow.svg);
   background-size: contain;
   background-position: center center;
 }
-:root.light-mode .feed-post-style-switch > div:nth-of-type(2) {
+:root.light-mode .feed-post-style-switch > i:nth-of-type(1) {
   background: no-repeat url(../assets/dropdown-arrow-light.svg);
   background-size: contain;
   background-position: center center;
@@ -85,6 +86,7 @@
   left: -1px;
 }
 .post-style-dropdown-item {
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 8px;
