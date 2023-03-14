@@ -1,5 +1,6 @@
 import createError from 'http-errors';
 import dotenv from 'dotenv'
+import cors from 'cors'
 import express, { NextFunction, Response, Request } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
@@ -25,6 +26,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({
+  origin: 'http://localhost:5173',
+  optionsSuccessStatus: 200
+}))
 
 app.use('/posts', postRouter);
 app.use('/users', userRouter);

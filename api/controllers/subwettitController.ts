@@ -3,7 +3,7 @@ import SubwettitModel from "../models/subwettit";
 import mongoose from "mongoose";
 
 export async function createplaceholderSubwettits(req: Request, res: Response, next: NextFunction) {
-    const titles = ['Subwettit One', 'Subwettit Zwei', 'Subwettit Tres']
+    const titles = ['w/SubwettitOne', 'w/SubwettitZwei', 'w/SubwettitTres']
     const types = ['public', 'public', 'private']
     const nsfw = [true, false, false]
     const members = [[new mongoose.Types.ObjectId('640e1a5aab985d310f9e5f5e')], [new mongoose.Types.ObjectId('640e1a5aab985d310f9e5f60'),
@@ -19,4 +19,9 @@ export async function createplaceholderSubwettits(req: Request, res: Response, n
         subwettit.save()
     }
     res.json({success: true})
+}
+
+export async function getAllSubwettits(req: Request, res: Response, next: NextFunction) {
+    const data = await SubwettitModel.find()
+    res.json(data)
 }

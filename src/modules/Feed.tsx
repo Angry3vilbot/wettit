@@ -99,15 +99,15 @@ function Feed({ postStyleState, setPostStyleState }) {
             <i></i>
             <div className='post-style-dropdown hidden' ref={postStyleDropdown}>
                 <button className='post-style-dropdown-item selected' onClick={(ev) => changePostStyle(ev, 'card')}>
-                    <div></div>
+                    <i></i>
                     <p>Card</p>
                 </button>
                 <button className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'classic')}>
-                    <div></div>
+                    <i></i>
                     <p>Classic</p>
                 </button>
                 <button className='post-style-dropdown-item' onClick={(ev) => changePostStyle(ev, 'compact')}>
-                    <div></div>
+                    <i></i>
                     <p>Compact</p>
                 </button>
             </div>

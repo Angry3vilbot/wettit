@@ -6,14 +6,24 @@ import dropdownArrowLight from '../assets/dropdown-arrow-light.svg'
 import searchIcon from '../assets/magnify.svg'
 import verticalSplit from '../assets/vertical-split.svg'
 import profilepicture from '../assets/pfp.png'
-import carbonated from '../assets/subwettit-icons/carbonated.png'
-import oceans from '../assets/subwettit-icons/oceans.png'
-import river from '../assets/subwettit-icons/river.png'
-import sea from '../assets/subwettit-icons/sea.webp'
-import water from '../assets/subwettit-icons/water.jpg'
 import { useState } from 'react'
 
-function Navigation({ darkMode, setDarkMode}) {
+interface Props {
+  darkMode: Boolean
+  setDarkMode: Function
+  subwettits: Array<Subwettit>
+}
+
+interface Subwettit extends Object {
+  title: String
+  type: String
+  logo: Buffer
+  nsfw: Boolean
+  members: Array<String>
+  moderators: Array<String>
+}
+
+function Navigation({ darkMode, setDarkMode, subwettits }: Props) {
   
   const [dropDownItems, setDropDownItems] = useState<Array<any>>([])
   const [filter, setFilter] = useState('')
@@ -24,8 +34,9 @@ function Navigation({ darkMode, setDarkMode}) {
   const profileDropdown = useRef<HTMLDivElement>(null)
   const profile = useRef<HTMLDivElement>(null)
 
-  const filteredItems = dropDownItems.filter(item => {
-    return item.key?.toLowerCase().includes(filter.toLowerCase())
+  const filteredItems = dropDownItems.filter((item: ReactElement) => {
+    console.log(item)
+    return item.props["data-title"].toLowerCase().includes(filter.toLowerCase())
   })
 
   function submitSearch(ev){
@@ -35,18 +46,16 @@ function Navigation({ darkMode, setDarkMode}) {
 
   //? Needs to be reworked according to data received from API 
   function dropDown(){
-    let subwettitNameArray = ['w/water', 'w/carbonateddrinks', 'w/oceans', 'w/seas', 'w/rivers']
-    let subwettitIconsArray = [water, carbonated, oceans, sea, river]
     let subElementsArray: Array<ReactElement> = []
-    subwettitNameArray.forEach((subwettit)=>{
-      if(subwettit.includes(filter)){
+    subwettits.forEach((subwettit)=>{
+      if(subwettit.title.includes(filter)){
         let style = {
-          background: `center / contain no-repeat url(${subwettitIconsArray[subwettitNameArray.indexOf(subwettit)]})`
+          background: `center / contain no-repeat url(${subwettit.logo})`
         }
         subElementsArray.push(
-        <div className='dropped-subwettit' key={subwettit}>
+        <div className='dropped-subwettit' data-title={subwettit.title} key={Math.random()}>
           <div style={style}></div>
-          <p>{subwettit}</p>
+          <p>{subwettit.title}</p>
         </div>
         )
       }

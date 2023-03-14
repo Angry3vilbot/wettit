@@ -94,36 +94,36 @@
 .post-style-dropdown-item:not(:nth-of-type(3)) {
   border-bottom: 1px solid var(--nav-border-color);
 }
-.post-style-dropdown-item > div {
+.post-style-dropdown-item > i {
   width: 30px;
   height: 30px;
 }
-.post-style-dropdown-item:not(.selected):nth-child(1) > div {
+.post-style-dropdown-item:not(.selected):nth-child(1) > i {
   background: no-repeat url(../assets/card-inactive.svg);
   background-size: contain;
   background-position: center center;
 }
-.post-style-dropdown-item:is(.selected):nth-child(1) > div {
+.post-style-dropdown-item:is(.selected):nth-child(1) > i {
   background: no-repeat url(../assets/card-active.svg);
   background-size: contain;
   background-position: center center;
 }
-.post-style-dropdown-item:not(.selected):nth-child(2) > div {
+.post-style-dropdown-item:not(.selected):nth-child(2) > i {
   background: no-repeat url(../assets/classicInactive.svg);
   background-size: contain;
   background-position: center center;
 }
-.post-style-dropdown-item:is(.selected):nth-child(2) > div {
+.post-style-dropdown-item:is(.selected):nth-child(2) > i {
   background: no-repeat url(../assets/classicActive.svg);
   background-size: contain;
   background-position: center center;
 }
-.post-style-dropdown-item:not(.selected):nth-child(3) > div {
+.post-style-dropdown-item:not(.selected):nth-child(3) > i {
   background: no-repeat url(../assets/compactInactive.svg);
   background-size: contain;
   background-position: center center;
 }
-.post-style-dropdown-item:is(.selected):nth-child(3) > div {
+.post-style-dropdown-item:is(.selected):nth-child(3) > i {
   background: no-repeat url(../assets/compactActive.svg);
   background-size: contain;
   background-position: center center;

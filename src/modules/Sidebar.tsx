@@ -8,7 +8,20 @@ import river from '../assets/subwettit-icons/river.png'
 import sea from '../assets/subwettit-icons/sea.webp'
 import water from '../assets/subwettit-icons/water.jpg'
 
-function Sidebar() {
+interface Props {
+    subwettits: Array<Subwettit>
+}
+
+interface Subwettit extends Object {
+    title: String,
+    type: String,
+    logo: Buffer,
+    nsfw: Boolean,
+    members: Array<String>,
+    moderators: Array<String>
+}
+
+function Sidebar({ subwettits }: Props) {
   function getRandomLeaderboard(){
     let possibleOptionsArray = ['drinks', 'bodies', 'growing']
     let rand = Math.floor(Math.random() * possibleOptionsArray.length)
