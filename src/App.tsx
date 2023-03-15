@@ -11,7 +11,8 @@ interface Subwettit extends Object {
   logo: Buffer,
   nsfw: Boolean,
   members: Array<String>,
-  moderators: Array<String>
+  moderators: Array<String>,
+  creation_date: Date
 }
 
 function App() {

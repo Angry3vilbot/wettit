@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import '../styles/sidebar.css'
 import greenArrow from '../assets/green-arrow.svg'
 import redArrow from '../assets/red-arrow.svg'
@@ -18,39 +18,58 @@ interface Subwettit extends Object {
     logo: Buffer,
     nsfw: Boolean,
     members: Array<String>,
-    moderators: Array<String>
+    moderators: Array<String>,
+    creation_date: Date
 }
 
 function Sidebar({ subwettits }: Props) {
+  // Put the rand into a state to stop it from switching on ReRender
+  const [rand, setRand] = useState<number>(Math.floor(Math.random() * 3))
+  const [newest, setNewest] = useState<Array<Subwettit>>()
+  const [mostPopular, setMostPopular] = useState<Array<Subwettit>>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+        let data1: Array<Subwettit> = await (await fetch('http://localhost:8000/subwettits/newest')).json()
+        let data2 = await (await fetch('http://localhost:8000/subwettits/most-popular')).json()
+        setNewest(data1)
+        setMostPopular(data2)
+    }   
+    fetchData()
+  }, [])
+
   function getRandomLeaderboard(){
-    let possibleOptionsArray = ['drinks', 'bodies', 'growing']
-    let rand = Math.floor(Math.random() * possibleOptionsArray.length)
+    let possibleOptionsArray = ['mostPopular', 'rising', 'newest']
     let result = possibleOptionsArray[rand]
+    let jsxArray: Array<ReactElement> = []
+
     switch(result){
-        case 'drinks':
+        case 'mostPopular':
+            for (let i = 0; i <= mostPopular.length - 1; i++) {
+                //? How do I know what arrow to put? (Save a copy of the query results each 24 hours in the database and compare?)
+                // Or just abandon the idea, that also works
+                jsxArray.push(
+                    <div className='leaderboard-item' key={i}>
+                        <h5>{i+1}</h5>
+                        <img src={greenArrow}></img>
+                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${mostPopular[i].logo}) center center`, backgroundSize: 'contain'}}></div>
+                        <p>{mostPopular[i].title}</p>
+                    </div>
+                )
+            }
+
             return (
                 <div className='top-card'>
                     <div className='caption-container'>
-                        <h3>Top Drink Communities</h3>
+                        <h3>Most Popular Communities</h3>
                     </div>
                     <div className='leaderboard'>
-                        <div className='leaderboard-item'>
-                            <h5>1</h5>
-                            <img src={greenArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${water}) center center`, backgroundSize: 'contain'}}></div>
-                            <p>w/water</p>
-                        </div>
-                        <div className='leaderboard-item'>
-                            <h5>2</h5>
-                            <img src={redArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${carbonated}) center center`, backgroundSize: 'contain'}}></div>
-                            <p>w/carbonateddrinks</p>
-                        </div>
+                        {jsxArray}
                         <div className='leaderboard-view-all-btn'>View All</div>
                     </div>
                 </div>
             )
-        case 'bodies':
+        case 'rising':
             return (
                 <div className='top-card'>
                     <div className='caption-container'>
@@ -79,43 +98,27 @@ function Sidebar({ subwettits }: Props) {
                     </div>
                 </div>
             )
-        case 'growing':
+        case 'newest':
+            for (let i = 0; i <= newest.length - 1; i++) {
+                //? How do I know what arrow to put? (Save a copy of the query results each 24 hours in the database and compare?)
+                // Or just abandon the idea, that also works
+                jsxArray.push(
+                    <div className='leaderboard-item' key={i}>
+                        <h5>{i+1}</h5>
+                        <img src={greenArrow}></img>
+                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${newest[i].logo}) center center`, backgroundSize: 'contain'}}></div>
+                        <p>{newest[i].title}</p>
+                    </div>
+                )
+            }
+
             return (
                 <div className='top-card'>
                     <div className='caption-container'>
-                        <h3>Top Growing Communities</h3>
+                        <h3>The Newest Communities</h3>
                     </div>
                     <div className='leaderboard'>
-                        <div className='leaderboard-item'>
-                            <h5>1</h5>
-                            <img src={greenArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${water}) center center/contain`}}></div>
-                            <p>w/water</p>
-                        </div>
-                        <div className='leaderboard-item'>
-                            <h5>2</h5>
-                            <img src={greenArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${sea}) center center/contain`}}></div>
-                            <p>w/seas</p>
-                        </div>
-                        <div className='leaderboard-item'>
-                            <h5>3</h5>
-                            <img src={redArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${carbonated}) center center/contain`}}></div>
-                            <p>w/carbonateddrinks</p>
-                        </div>
-                        <div className='leaderboard-item'>
-                            <h5>4</h5>
-                            <img src={redArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${oceans}) center center/contain`}}></div>
-                            <p>w/oceans</p>
-                        </div>
-                        <div className='leaderboard-item'>
-                            <h5>5</h5>
-                            <img src={greenArrow}></img>
-                            <div className='leaderboard-item-image' style={{background: `no-repeat url(${river}) center center/contain`}}></div>
-                            <p>w/rivers</p>
-                        </div>
+                        {jsxArray}
                         <div className='leaderboard-view-all-btn'>View All</div>
                     </div>
                 </div>
@@ -124,6 +127,9 @@ function Sidebar({ subwettits }: Props) {
             throw 'Error loading subwettit leaderboard'
     }
   }
+
+  if(!newest || !mostPopular) return <div></div>
+
   return (
     <div className='sidebar'>
         {getRandomLeaderboard()}

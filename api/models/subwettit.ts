@@ -6,7 +6,8 @@ const SubwettitSchema = new Schema({
     logo: { data: Buffer, contentType: String },
     nsfw: { type: Boolean, required: true },
     members: { type: Array },
-    moderators: { type: Array }
+    moderators: { type: Array },
+    creation_date: { type: Date, required: true }
 }, { versionKey: false })
 
 const SubwettitModel = Model("Subwettit", SubwettitSchema, "Subwettits")
