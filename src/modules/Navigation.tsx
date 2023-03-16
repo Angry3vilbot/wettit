@@ -7,6 +7,7 @@ import searchIcon from '../assets/magnify.svg'
 import verticalSplit from '../assets/vertical-split.svg'
 import profilepicture from '../assets/pfp.png'
 import { useState } from 'react'
+import placeholderIcon from '../assets/placeholderIcon.png'
 
 interface Props {
   darkMode: Boolean
@@ -44,13 +45,12 @@ function Navigation({ darkMode, setDarkMode, subwettits }: Props) {
     console.log(searchbar.current?.value)
   }
 
-  //? Needs to be reworked according to data received from API 
   function dropDown(){
     let subElementsArray: Array<ReactElement> = []
     subwettits.forEach((subwettit)=>{
       if(subwettit.title.includes(filter)){
         let style = {
-          background: `center / contain no-repeat url(${subwettit.logo})`
+          background: `center / contain no-repeat url(${subwettit.logo ?? placeholderIcon})`
         }
         subElementsArray.push(
         <div className='dropped-subwettit' data-title={subwettit.title} key={Math.random()}>

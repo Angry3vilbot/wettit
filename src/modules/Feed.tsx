@@ -11,19 +11,48 @@ import topInactive from '../assets/top-inactive.svg'
 import { useEffect } from 'react'
 import Posts from './Posts'
 
+interface Subwettit extends Object {
+    title: String,
+    logo: Buffer,
+}
+
+interface Post extends Object {
+    title: String,
+    content: String,
+    image: Buffer,
+    author: String,
+    date: Date,
+    score: number,
+    comments: Array<String>, // Not implemented
+    formatted_subwettit: Subwettit,
+    flair: String,
+    flairColor: String
+}
+
 function Feed({ postStyleState, setPostStyleState }) {
-    const [sortBy, setSortBy] = useState('best')
+    const [sortBy, setSortBy] = useState<String>('best')
+    const [posts, setPosts] = useState<Array<Post>>()
 
     const postStyleDropdown = useRef<HTMLDivElement>(null)
     const postStyleSwitch = useRef<HTMLDivElement>(null)
-    // const postStyleDropdown = useRef(null)
-    // const postStyleDropdown = useRef(null)
-
 
     useEffect(()=>{
         document.querySelectorAll('.feed-switch').forEach((item) => item.addEventListener('click', changeFeed))
         document.querySelectorAll('.feed-switch active').forEach((item) => item.addEventListener('click', changeFeed))
     }, [])
+
+    useEffect(() => {
+        async function getData(category: String) {
+            let data
+            switch(category) {
+                case 'best':
+                    data = await (await fetch('http://localhost:8000/posts/best')).json()
+                    setPosts(data)
+                    break
+            }
+        }
+        getData(sortBy)
+    }, [sortBy])
     
     function checkDropEvent(item){
         if(item.children.length > 2){
@@ -113,7 +142,7 @@ function Feed({ postStyleState, setPostStyleState }) {
             </div>
         </div>
     </div>
-    <Posts postStyle={postStyleState}></Posts>
+    <Posts postStyle={postStyleState} posts={posts}></Posts>
     </div>
   )
 }

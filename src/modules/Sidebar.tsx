@@ -2,11 +2,10 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import '../styles/sidebar.css'
 import greenArrow from '../assets/green-arrow.svg'
 import redArrow from '../assets/red-arrow.svg'
-import carbonated from '../assets/subwettit-icons/carbonated.png'
 import oceans from '../assets/subwettit-icons/oceans.png'
 import river from '../assets/subwettit-icons/river.png'
 import sea from '../assets/subwettit-icons/sea.webp'
-import water from '../assets/subwettit-icons/water.jpg'
+import placeholderIcon from '../assets/placeholderIcon.png'
 
 interface Props {
     subwettits: Array<Subwettit>
@@ -52,7 +51,7 @@ function Sidebar({ subwettits }: Props) {
                     <div className='leaderboard-item' key={i}>
                         <h5>{i+1}</h5>
                         <img src={greenArrow}></img>
-                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${mostPopular[i].logo}) center center`, backgroundSize: 'contain'}}></div>
+                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${mostPopular[i].logo ?? placeholderIcon}) center center`, backgroundSize: 'contain'}}></div>
                         <p>{mostPopular[i].title}</p>
                     </div>
                 )
@@ -106,7 +105,7 @@ function Sidebar({ subwettits }: Props) {
                     <div className='leaderboard-item' key={i}>
                         <h5>{i+1}</h5>
                         <img src={greenArrow}></img>
-                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${newest[i].logo}) center center`, backgroundSize: 'contain'}}></div>
+                        <div className='leaderboard-item-image' style={{background: `no-repeat url(${newest[i].logo ?? placeholderIcon}) center center`, backgroundSize: 'contain'}}></div>
                         <p>{newest[i].title}</p>
                     </div>
                 )

@@ -1,21 +1,34 @@
 import React from 'react'
+import moment from 'moment'
 import '../react-app-env.d.ts'
-import testImage from '../assets/sticker.png'
-import testGif from '../assets/test-gif.gif'
 import '../styles/posts.css'
 import '../styles/posts-compact.css'
 import '../styles/posts-classic.css'
-import water from '../assets/subwettit-icons/water.jpg'
-import carbonated from '../assets/subwettit-icons/carbonated.png'
-import oceans from '../assets/subwettit-icons/oceans.png'
-import seas from '../assets/subwettit-icons/sea.webp'
-import rivers from '../assets/subwettit-icons/river.png'
 
 type Props = {
-  postStyle: string;
+  postStyle: string,
+  posts: Array<Post>
 }
 
-function Posts({ postStyle }: Props) {
+interface Post extends Object {
+  title: String,
+  content: String,
+  image: Buffer,
+  author: String,
+  date: Date,
+  score: number,
+  comments: Array<String>, // Not implemented
+  formatted_subwettit: Subwettit,
+  flair: String,
+  flairColor: String
+}
+
+interface Subwettit extends Object {
+  title: String,
+  logo: Buffer,
+}
+
+function Posts({ postStyle, posts }: Props) {
   function revealFullPost(ev){
     //? Future me here, for now I have no idea if there is a better way of doing it, will think about it later.
     //  content     fullscreen-btn footer        post-container
@@ -30,7 +43,7 @@ function Posts({ postStyle }: Props) {
 
   function vote(ev, type : string){
     if(type === 'up'){
-      //? Instead of this whole mess, I will be using API calls to an external Express API. For now I will clean this up a little bit
+      //? Instead of this whole mess, I will be using API calls to an external Express API.
       if(!ev.target.parentElement.querySelector('[class="upvote upvote-active"]')){
         let score = ev.target.parentElement.querySelector('[class="post-score"]')
 
@@ -80,41 +93,6 @@ function Posts({ postStyle }: Props) {
   }
   
   function generatePosts(){
-    let postNameArray : Array<string> = ['Post name the first one', 'I love Trains!', 'TESTESTESTESt', 'video tag attempt 2',
-    'He adds something different to the team.', "Orange juice is much better with the pulp in it. I am a vegan.", 
-    "If I had more money, I could move to a bigger house.", "Oysters are slimy.", 
-    "Today, I met a vampire who liked to eat beets.", "You know what I mean.", "Very good job, sweetheart!", 
-    "Am I in the White House?", "This is the biggest party I've ever been to."]
-
-    let usernameArray : Array<string> = ['Angry3vilbot', 'mikebalaker', 'Midvey', 'masterbaiter', 
-    'Fusecrush', 'Slaughterhaus88', 'sexNOW', 'bruhmomentlover67', 'Tweedlex', 'Robotnik', 'RowanTree', 'marling111', '2Pelfox4u']
-
-    let subwettitArray : Array<string> = ['water', 'carbonateddrinks', 'oceans', 'rivers', 'oceans', 'seas', 
-    'rivers', 'carbonateddrinks', 'seas', 'rivers', 'water', 'carbonateddrinks', 'oceans']
-
-    let subwettitLogoArray : Array<string> = [water, carbonated, oceans, rivers, oceans, seas, rivers, carbonated,
-    seas, rivers, water, carbonated, oceans]
-
-    let timeArray : Array<Date> = [new Date(), new Date('July 20, 69 20:17:40 GMT+00:00'), new Date('10 september 2005'), new Date('11 november 1444'), new Date('18 october 2021'),
-    new Date('29 november 2022'), new Date('30 november 2022'), new Date('1 december 2022'), new Date('28 november 2020'), new Date('28 november 2022'), new Date('28 november 2019'), new Date('28 november 2018'),
-    new Date('28 november 2017')]
-
-    let flairColorArray : Array<string> = ['green', 'blue', 'magenta', '#00BEFE']
-
-    let flairTextArray : Array<string> = ['longFlairNameHere1244567423', 'image', 'meme', 'video']
-
-    let contentArray : Array<string | JSX.Element> = [`Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-    Dolorem magni ex laboriosam. Porro quibusdam facilis architecto quaerat, alias officia sequi dolore delectus 
-    error nisi! Modi temporibus recusandae nobis dicta obcaecati.`, <img src={testImage}></img>, <iframe src={testGif}></iframe>, 
-  <video controls><source src='https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'></source></video>,
-    <img src={testImage}></img>, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu condimentum odio. Nam nibh risus, lobortis et hendrerit at, cursus at mauris. Sed suscipit vel purus id lobortis.', 
-  'Maecenas diam magna, tincidunt vel sagittis convallis, pellentesque sed nisi. Praesent fringilla viverra pretium. Donec porttitor ex nec velit ultrices, non sollicitudin massa gravida. Sed commodo vulputate nibh, sit amet venenatis elit dignissim quis.',
-'Praesent congue enim blandit iaculis fermentum. Phasellus lacinia tempus orci, at semper erat tincidunt in. Nam ut turpis a tortor facilisis lobortis ut sed urna.', 'Morbi luctus cursus arcu, ac semper nulla. Vivamus sit amet magna vitae mauris ullamcorper dapibus eu ut metus. Mauris fermentum ligula nec congue varius. Suspendisse id ipsum vel ligula elementum vehicula vel nec odio. In tincidunt sollicitudin elit quis elementum. Vestibulum ullamcorper metus id odio vehicula congue. Integer vel dolor hendrerit, tincidunt mi et, suscipit nisl.',
-'Duis ullamcorper lacus ut euismod suscipit. Nunc dictum lorem tincidunt massa mattis tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam turpis tellus, euismod vitae faucibus non, aliquam sit amet felis. Maecenas efficitur ex neque, at commodo tortor placerat sit amet. Nam convallis est non gravida gravida. Praesent quis dolor feugiat, ornare dui at, fringilla risus.', 
-'Etiam congue, nisl at tempor volutpat, quam eros posuere orci, a facilisis ipsum ante at tellus. Proin aliquet lacus sit amet lectus malesuada, ut maximus risus ultrices. Morbi luctus cursus arcu, ac semper nulla. Vivamus sit amet magna vitae mauris ullamcorper dapibus eu ut metus. Mauris fermentum ligula nec congue varius. Suspendisse id ipsum vel ligula elementum vehicula vel nec odio. In tincidunt sollicitudin elit quis elementum. Vestibulum ullamcorper metus id odio vehicula congue. Integer vel dolor hendrerit, tincidunt mi et, suscipit nisl.',
-'Generated 5 paragraphs, 396 words, 2676 bytes of Lorem Ipsum', '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."']
-    let scoreArray : Array<number> = [213, 515, 23677, 4035, 0, 213, 515, 23677, 4035, 0, 213, 515, 23677]
-    let commentCountArray : Array<number> = [11, 1, 0, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     let resultArray : Array<JSX.Element> = []
     function convertScore(num : number){
       let newnum = num.toString()
@@ -132,134 +110,110 @@ function Posts({ postStyle }: Props) {
       }
     }
 
-    //? To be removed - will use luxon in API for time display/conversion
-    function convertTime(time:Date) {
-      let check = new Date().getTime() - new Date(time).getTime()
-      if(check < 60000){
-        return '0 minutes'
-      }
-      else if(check >= 60000 && check < 3600000){
-        return `${Math.floor(check / 60000)} minutes`
-      }
-      else if(check >= 3600000 && check < 86400000){
-        return `${Math.floor(check / 3600000)} hours`
-      }
-      else if(check >= 86400000 && check < 31536000000){
-        return `${Math.floor(check / 86400000)} days`
-      }
-      return `${Math.floor(check / 31536000000)} years`
-    }
-
-    //? Will need to probably be completely redone, based on the data from the API, as this looks kinda messy
-    postNameArray.forEach((title) => {
-      let style = {
-        background: `center / contain no-repeat url(${subwettitLogoArray[postNameArray.indexOf(title)]})`
-      }
-      let flair = {
-        backgroundColor: `${flairColorArray[postNameArray.indexOf(title)]}`
-      }
-      switch(typeof(contentArray[postNameArray.indexOf(title)])){
-        case 'string':
-          resultArray.push(<div className='post text-post' key={title}>
+    if(posts){
+      posts.forEach((post) => {
+        let style = {
+          background: `center / contain no-repeat url(${post.formatted_subwettit.logo})`
+        }
+        let flair = {
+          backgroundColor: `${post.flairColor}`
+        }
+        if(post.content) {
+          resultArray.push(<div className='post text-post' key={Math.random()}>
             <section className='upvote-column'>
               <div className='upvote' onClick={(ev) => vote(ev, 'up')}></div>
-              <p className='post-score'>{convertScore(scoreArray[postNameArray.indexOf(title)])}</p>
+              <p className='post-score'>{convertScore(post.score)}</p>
               <div className='downvote' onClick={(ev) => vote(ev, 'down')}></div>
             </section>
             <section className='post-content-container'>
               <div className='post-content-info-bar'>
                 <div className='post-subwettit-info'>
                   <div className='post-subwettit-image' style={style}></div>
-                  <a href='bruh.com'><h5>w/{subwettitArray[postNameArray.indexOf(title)]}</h5></a>
+                  <a href='bruh.com'><h5>{post.formatted_subwettit.title}</h5></a>
                 </div>
                 <div className='post-user-info'>
-                  <p>Posted by <span>u/{usernameArray[postNameArray.indexOf(title)]}</span> {convertTime(timeArray[postNameArray.indexOf(title)])} ago</p>
+                  <p>Posted by <span>u/{post.author}</span> {moment(post.date).fromNow()} ago</p>
                 </div>
               </div>
               <div className='post-classic-miniature text-miniature'></div>
               <div className='post-title'>
-                <h2>{title}</h2>
-                <div style={flair}><p>{flairTextArray[postNameArray.indexOf(title)]}</p></div>
+                <h2>{post.title}</h2>
+                <div style={flair}><p>{post.flair}</p></div>
               </div>
-              <div className='post-content'>{contentArray[postNameArray.indexOf(title)]}</div>
+              <div className='post-content'>{post.content}</div>
               {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
               <div className='post-footer'>
                 <div className='post-fullscreen-button-container' onClick={revealFullPost}>
                   <div></div>
-                  <div></div>
+                    <div></div>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>{(()=>{if(post.comments.length === 1){return '1 comment'} else return `${post.comments.length} comments`})()}</p>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>Share</p>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>Save</p>
+                  </div>
                 </div>
-                <div>
-                  <div></div>
-                  <p>{(()=>{if(commentCountArray[postNameArray.indexOf(title)] === 1){return '1 comment'} else return `${commentCountArray[postNameArray.indexOf(title)]} comments`})()}</p>
-                </div>
-                <div>
-                  <div></div>
-                  <p>Share</p>
-                </div>
-                <div>
-                  <div></div>
-                  <p>Save</p>
-                </div>
-              </div>
-            </section>
-          </div>)
-          break
-        case 'object':
-          //? What is this and why is it unused?
-          let miniatureImageStyle = {
-            background: `center / contain no-repeat url(${contentArray[postNameArray.indexOf(title)]})`
-          }
-
-          resultArray.push(
-          <div className='post file-post' key={title}>
-            <section className='upvote-column'>
-              <div className='upvote' onClick={(ev) => vote(ev, 'up')}></div>
-                <p className='post-score'>{convertScore(scoreArray[postNameArray.indexOf(title)])}</p>
-              <div className='downvote' onClick={(ev) => vote(ev, 'down')}></div>
-            </section>
-            
-            <section className='post-content-container'>
-              <div className='post-content-info-bar'>
-                <div className='post-subwettit-info'>
-                  <div className='post-subwettit-image' style={style}></div>
-                  <a href='bruh.com'><h5>w/{subwettitArray[postNameArray.indexOf(title)]}</h5></a>
-                </div>
-                <div className='post-user-info'>
-                  <p>Posted by <span>u/{usernameArray[postNameArray.indexOf(title)]}</span> {convertTime(timeArray[postNameArray.indexOf(title)])} ago</p>
-                </div>
-              </div>
+              </section>
+            </div>)
+          } else {
+            resultArray.push(
+            <div className='post file-post' key={Math.random()}>
+              <section className='upvote-column'>
+                <div className='upvote' onClick={(ev) => vote(ev, 'up')}></div>
+                  <p className='post-score'>{convertScore(post.score)}</p>
+                <div className='downvote' onClick={(ev) => vote(ev, 'down')}></div>
+              </section>
               
-              <div className='post-classic-miniature'>{contentArray[postNameArray.indexOf(title)]}</div>
-              <div className='post-title'>
-                <h2>{title}</h2>
-                <div style={flair}><p>{flairTextArray[postNameArray.indexOf(title)]}</p></div>
-              </div>
+              <section className='post-content-container'>
+                <div className='post-content-info-bar'>
+                  <div className='post-subwettit-info'>
+                    <div className='post-subwettit-image' style={style}></div>
+                    <a href='bruh.com'><h5>{post.formatted_subwettit.title}</h5></a>
+                  </div>
+                  <div className='post-user-info'>
+                    <p>Posted by <span>u/{post.author}</span> {moment(post.date).fromNow()} ago</p>
+                  </div>
+                </div>
+                {/*//TODO Needs to be changed to the proper image data */}
+                <div className='post-classic-miniature'><img src={`data/${post.image}`}></img></div>
+                <div className='post-title'>
+                  <h2>{post.title}</h2>
+                  <div style={flair}><p>{post.flair}</p></div>
+                </div>
+                {/*//TODO Needs to be changed to the proper image data */}
+                <div className='post-content'><img src={`data/${post.image}`}/></div>
 
-              <div className='post-content'>{contentArray[postNameArray.indexOf(title)]}</div>
-
-              <div className='post-footer'>
-                {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
-                <div className='post-fullscreen-button-container' onClick={revealFullPost}>
-                  <div></div>
-                  <div></div>
+                <div className='post-footer'>
+                  {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
+                  <div className='post-fullscreen-button-container' onClick={revealFullPost}>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>{(()=>{if(post.comments.length === 1){return '1 comment'} else return `${post.comments.length} comments`})()}</p>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>Share</p>
+                  </div>
+                  <div>
+                    <div></div>
+                    <p>Save</p>
+                  </div>
                 </div>
-                <div>
-                  <div></div>
-                  <p>{(()=>{if(commentCountArray[postNameArray.indexOf(title)] === 1){return '1 comment'} else return `${commentCountArray[postNameArray.indexOf(title)]} comments`})()}</p>
-                </div>
-                <div>
-                  <div></div>
-                  <p>Share</p>
-                </div>
-                <div>
-                  <div></div>
-                  <p>Save</p>
-                </div>
-              </div>
-            </section>
-           </div>)
-      }
-    })
+              </section>
+            </div>)
+        }
+      })
+    }
     return resultArray
   }
 

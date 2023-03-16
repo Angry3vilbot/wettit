@@ -1,5 +1,5 @@
 import express from 'express';
-import { createplaceholderSubwettits, getAllSubwettits, getMostPopularSubwettits, getNewestSubwettits } from '../controllers/subwettitController';
+import { createplaceholderSubwettits, getAllSubwettits, getMostPopularSubwettits, getNewestSubwettits, getSubwettitData } from '../controllers/subwettitController';
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.get('/newest', getNewestSubwettits)
 
 // GET subwettits with the most members
 router.get('/most-popular', getMostPopularSubwettits)
+
+// GET subwettit by _id
+router.get('/:id', getSubwettitData)
 
 export default router;

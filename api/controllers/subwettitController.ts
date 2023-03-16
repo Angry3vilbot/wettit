@@ -38,3 +38,8 @@ export async function getMostPopularSubwettits(req: Request, res: Response, next
     let data = await SubwettitModel.find().sort({members: -1}).limit(5)
     res.json(data)
 }
+
+export async function getSubwettitData(req: Request, res: Response, next: NextFunction) {
+    let data = SubwettitModel.findById(req.params.id)
+    res.json(data)
+}

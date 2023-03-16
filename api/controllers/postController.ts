@@ -8,10 +8,9 @@ export async function getBestPosts(req: Request, res: Response, next: NextFuncti
     TODO: in the followedSubwettits array of the current user
     */
     // Find all posts made within the last 8 hours
-    const posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 28800000} }).exec()
+    const posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 28800000} }).populate('formatted_subwettit').exec()
     // Sort the posts by score
-    posts.sort((a, b) => a.score > b.score ? 1 : -1)
-    console.log(posts)
+    posts.sort((a, b) => (a.upvotes.length - a.downvotes.length) > (b.upvotes.length - b.downvotes.length) ? 1 : -1)
     res.json(posts)
 };
 
@@ -20,9 +19,11 @@ export async function createPlaceholderPosts(req: Request, res: Response, next: 
     const dates = [new Date(), new Date('10/10/2010'), new Date('11/11/2011')]
     const authors = [new Types.ObjectId('640e1a5aab985d310f9e5f5e'), new Types.ObjectId('640e1a5aab985d310f9e5f60'),
     new Types.ObjectId('640e1a5aab985d310f9e5f5f')]
-    const scores = [1100, 23, 53000]
-    const subwettits = [new Types.ObjectId('640e1f4984d1720caf9d2252'), new Types.ObjectId('640e1f4984d1720caf9d2253'), 
-    new Types.ObjectId('640e1f4984d1720caf9d2254')]
+    const upvotes = [[], [new Types.ObjectId('640e1a5aab985d310f9e5f5e'), new Types.ObjectId('640e1a5aab985d310f9e5f5f')], 
+    [new Types.ObjectId('640e1a5aab985d310f9e5f5e')]]
+    const downvotes = [[new Types.ObjectId('640e1a5aab985d310f9e5f60'), new Types.ObjectId('640e1a5aab985d310f9e5f5f')], [], []]
+    const subwettits = [new Types.ObjectId('641393951e6ff19577381164'), new Types.ObjectId('641393951e6ff19577381165'), 
+    new Types.ObjectId('641393951e6ff19577381166')]
     const contents = ['DASFSAFGSGASGsdsaFASf ASfasfsaf ASFs aFsafAS FASF ASf', `Lorem
     Ipsum
     Dolor
@@ -34,7 +35,8 @@ export async function createPlaceholderPosts(req: Request, res: Response, next: 
             title: titles[i],
             date: dates[i],
             author: authors[i],
-            score: scores[i],
+            upvotes: upvotes[i],
+            downvotes: downvotes[i],
             subwettit: subwettits[i],
             content: contents[i]
         })
