@@ -9,5 +9,5 @@ A Reddit clone with a different design, made with React<img src="https://cdn4.ic
   * Learned how to use Vite for creating React projects
   * Learned how to use TypeScript
   * Learned how to use TypeScript with React
-# Important Note
+# ❗Important Note❗
 The Github Pages page for the website is broken, as it does not have a way of running the API
