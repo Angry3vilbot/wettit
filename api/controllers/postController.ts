@@ -8,9 +8,18 @@ export async function getBestPosts(req: Request, res: Response, next: NextFuncti
     TODO: in the followedSubwettits array of the current user
     */
     // Find all posts made within the last 8 hours
-    const posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 28800000} }).populate('formatted_subwettit').exec()
-    // Sort the posts by score
-    posts.sort((a, b) => (a.upvotes.length - a.downvotes.length) > (b.upvotes.length - b.downvotes.length) ? 1 : -1)
+    let posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 28800000} }).populate('formatted_subwettit').exec()
+    // If there are less than 5 posts made within the last 8 hours, get all posts
+    if(posts.length < 5) {
+        posts = await PostModel.find().populate('formatted_subwettit').exec()
+    }
+    // Sort the posts by score and date
+    posts.sort((a, b) => {
+        if(((a.upvotes.length + a.downvotes.length) * a.date.valueOf()) >= ((b.upvotes.length + b.downvotes.length) * b.date.valueOf())) {
+            return -1
+        }
+        return 1
+    })
     res.json(posts)
 };
 
