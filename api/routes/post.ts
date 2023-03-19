@@ -1,23 +1,19 @@
 import express from 'express';
-import { createPlaceholderPosts, getBestPosts } from '../controllers/postController';
+import { createPlaceholderPosts, getBestPosts, getHotPosts, getRecentPosts } from '../controllers/postController';
 
 const router = express.Router();
 
 // POST placeholder posts
 router.post('/createplaceholders', createPlaceholderPosts)
 
-// GET all posts made in the last 8 hours and sort them by upvote count
+// GET all posts made in the last 8 hours and sort them by upvote count and date via a formula
 router.get('/best', getBestPosts);
 
-// GET all posts and sort them by age AND upvote count via a formula
-router.get('/hot', function(req, res, next) {
-  
-});
+// GET all posts made in the last hour and sort them by upvote count 
+router.get('/hot', getHotPosts);
 
 // GET all posts and sort them by age - newest to oldest
-router.get('/new', function(req, res, next) {
-  
-});
+router.get('/recent', getRecentPosts);
 
 // GET all posts made in the last hour and sort them by upvote count
 router.get('/top/hour', function(req, res, next) {

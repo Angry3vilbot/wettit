@@ -23,6 +23,33 @@ export async function getBestPosts(req: Request, res: Response, next: NextFuncti
     res.json(posts)
 };
 
+export async function getHotPosts(req: Request, res: Response, next: NextFunction) {
+    /*
+    TODO: For now, it looks for ALL posts in the DB, later on I will make it look for those posts, whose subwettit value is included
+    TODO: in the followedSubwettits array of the current user
+    */
+    // Find all posts made within the last hour
+    let posts = await PostModel.find({ date: {$gte: new Date().valueOf() - 3600000} }).populate('formatted_subwettit').exec()
+    // Sort the posts by score
+    posts.sort((a, b) => {
+        if((a.upvotes.length + a.downvotes.length) >= (b.upvotes.length + b.downvotes.length)) {
+            return -1
+        }
+        return 1
+    })
+    res.json(posts)
+};
+
+export async function getRecentPosts(req: Request, res: Response, next: NextFunction) {
+    /*
+    TODO: For now, it looks for ALL posts in the DB, later on I will make it look for those posts, whose subwettit value is included
+    TODO: in the followedSubwettits array of the current user
+    */
+    // Find all posts and sort them by date
+    let posts = await PostModel.find().populate('formatted_subwettit').sort({date: -1}).exec()
+    res.json(posts)
+};
+
 export async function createPlaceholderPosts(req: Request, res: Response, next: NextFunction) {
     const titles = ['This is a post', 'This is a post too', 'I am a post as well']
     const dates = [new Date(), new Date('10/10/2010'), new Date('11/11/2011')]

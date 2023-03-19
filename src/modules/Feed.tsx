@@ -43,9 +43,25 @@ function Feed({ postStyleState, setPostStyleState }) {
 
     useEffect(() => {
         async function getData(category: String) {
-            let data
+            let data: Array<Post>
             switch(category) {
                 case 'best':
+                    data = await (await fetch('http://localhost:8000/posts/best')).json()
+                    console.log(data)
+                    setPosts(data)
+                    break
+                case 'hot':
+                    data = await (await fetch('http://localhost:8000/posts/hot')).json()
+                    console.log(data)
+                    setPosts(data)
+                    break
+                case 'recent':
+                    data = await (await fetch('http://localhost:8000/posts/recent')).json()
+                    console.log(data)
+                    setPosts(data)
+                    break
+                case 'top':
+                    //! Not Implemented
                     data = await (await fetch('http://localhost:8000/posts/best')).json()
                     setPosts(data)
                     break
