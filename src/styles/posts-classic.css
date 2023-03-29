@@ -27,8 +27,8 @@
 .main-container.classic
   .post
   .post-footer
-  > div:nth-of-type(1)
-  > div:nth-of-type(1) {
+  .post-fullscreen-button-container
+  > i:nth-of-type(1) {
   align-self: center;
   width: 35px;
   height: 25px;
@@ -40,13 +40,14 @@
 .main-container.classic
   .post
   .post-footer
-  > div:nth-of-type(1)
-  > div:nth-of-type(2) {
+  .post-fullscreen-button-container
+  > i:nth-of-type(2) {
   position: absolute;
   left: 100%;
   width: 1px;
+  height: 70%;
   background: linear-gradient(rgb(78, 76, 76), rgb(78, 76, 76)) no-repeat
-    right/1px 60%;
+    right/1px 100%;
 }
 
 .post-classic-miniature {

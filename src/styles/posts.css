@@ -123,17 +123,26 @@ a {
   height: 25px;
   align-self: center;
 }
-.post .post-footer > div:nth-of-type(2) > div {
+.post .post-footer > div:nth-of-type(2) > i {
+  display: block;
+  width: 35px;
+  height: 25px;
   background: no-repeat url(../assets/comment.svg);
   background-position: center center;
   background-size: contain;
 }
-.post .post-footer > div:nth-of-type(3) > div {
+.post .post-footer > div:nth-of-type(3) > i {
+  display: block;
+  width: 35px;
+  height: 25px;
   background: no-repeat url(../assets/share.svg);
   background-position: center center;
   background-size: contain;
 }
-.post .post-footer > div:nth-of-type(4) > div {
+.post .post-footer > div:nth-of-type(4) > i {
+  display: block;
+  width: 35px;
+  height: 25px;
   background: no-repeat url(../assets/bookmark.svg);
   background-position: center center;
   background-size: contain;

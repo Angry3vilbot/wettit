@@ -141,22 +141,21 @@ function Posts({ postStyle, posts }: Props) {
                 <div style={flair}><p>{post.flair}</p></div>
               </div>
               <div className='post-content'>{post.content}</div>
-              {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
               <div className='post-footer'>
                 <div className='post-fullscreen-button-container' onClick={revealFullPost}>
-                  <div></div>
-                    <div></div>
-                  </div>
+                  <i></i>
+                  <i></i>
+                </div>
                   <div>
-                    <div></div>
+                    <i></i>
                     <p>{(()=>{if(post.comments.length === 1){return '1 comment'} else return `${post.comments.length} comments`})()}</p>
                   </div>
                   <div>
-                    <div></div>
+                    <i></i>
                     <p>Share</p>
                   </div>
                   <div>
-                    <div></div>
+                    <i></i>
                     <p>Save</p>
                   </div>
                 </div>
@@ -193,8 +192,8 @@ function Posts({ postStyle, posts }: Props) {
                 <div className='post-footer'>
                   {/*//? These empty divs are used for icons, they should be changed out for <i> tags */}
                   <div className='post-fullscreen-button-container' onClick={revealFullPost}>
-                    <div></div>
-                    <div></div>
+                    <i></i>
+                    <i></i>
                   </div>
                   <div>
                     <div></div>
