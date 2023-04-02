@@ -6,7 +6,7 @@
   outline: 1px solid #585858;
 }
 .caption-container {
-  background: no-repeat url(../assets/top-banner-background.png);
+  background: no-repeat url(../../assets/top-banner-background.png);
   background-size: auto;
   background-position: center center;
   display: grid;

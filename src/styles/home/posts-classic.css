@@ -32,7 +32,7 @@
   align-self: center;
   width: 35px;
   height: 25px;
-  background: no-repeat url(../assets/fullscreen.svg);
+  background: no-repeat url(../../assets/fullscreen.svg);
   background-position: center center;
   background-size: contain;
 }
@@ -64,13 +64,13 @@
 }
 
 .post-classic-miniature.text-miniature {
-  background: no-repeat url(../assets/text-miniature.png);
+  background: no-repeat url(../../assets/text-miniature.png);
   background-position: center center;
   background-size: contain;
 }
 
 .post-classic-miniature:not(.text-miniature) {
-  background: no-repeat url(../assets/iframe-miniature.png);
+  background: no-repeat url(../../assets/iframe-miniature.png);
   background-position: center center;
   background-size: contain;
 }

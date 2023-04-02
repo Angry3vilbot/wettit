@@ -29,7 +29,7 @@ a {
   align-items: center;
 }
 .upvote {
-  background: no-repeat url(../assets/upvote.svg);
+  background: no-repeat url(../../assets/upvote.svg);
   background-size: contain;
   background-position: center center;
   width: 40px;
@@ -37,19 +37,19 @@ a {
   margin-top: 10px;
 }
 .downvote {
-  background: no-repeat url(../assets/downvote.svg);
+  background: no-repeat url(../../assets/downvote.svg);
   background-size: contain;
   background-position: center center;
   width: 40px;
   height: 40px;
 }
 .upvote-active {
-  background: no-repeat url(../assets/upvote-active.svg);
+  background: no-repeat url(../../assets/upvote-active.svg);
   background-size: contain;
   background-position: center center;
 }
 .downvote-active {
-  background: no-repeat url(../assets/downvote-active.svg);
+  background: no-repeat url(../../assets/downvote-active.svg);
   background-size: contain;
   background-position: center center;
 }
@@ -127,7 +127,7 @@ a {
   display: block;
   width: 35px;
   height: 25px;
-  background: no-repeat url(../assets/comment.svg);
+  background: no-repeat url(../../assets/comment.svg);
   background-position: center center;
   background-size: contain;
 }
@@ -135,7 +135,7 @@ a {
   display: block;
   width: 35px;
   height: 25px;
-  background: no-repeat url(../assets/share.svg);
+  background: no-repeat url(../../assets/share.svg);
   background-position: center center;
   background-size: contain;
 }
@@ -143,7 +143,7 @@ a {
   display: block;
   width: 35px;
   height: 25px;
-  background: no-repeat url(../assets/bookmark.svg);
+  background: no-repeat url(../../assets/bookmark.svg);
   background-position: center center;
   background-size: contain;
 }
@@ -187,14 +187,14 @@ a {
   cursor: pointer;
 }
 .upvote:hover {
-  background: no-repeat url(../assets/upvote-highlight.svg);
+  background: no-repeat url(../../assets/upvote-highlight.svg);
   background-position: center center;
   background-size: contain;
   background-color: var(--vote-hover-bg-color);
   border-radius: 5px;
 }
 .downvote:hover {
-  background: no-repeat url(../assets/downvote-highlight.svg);
+  background: no-repeat url(../../assets/downvote-highlight.svg);
   background-position: center center;
   background-size: contain;
   background-color: var(--vote-hover-bg-color);

@@ -1,5 +1,5 @@
 import React, { ReactElement, useRef } from 'react'
-import '../styles/navigation.css'
+import '../styles/modules/navigation.css'
 import home from '../assets/home.svg'
 import dropdownArrow from '../assets/dropdown-arrow.svg'
 import dropdownArrowLight from '../assets/dropdown-arrow-light.svg'

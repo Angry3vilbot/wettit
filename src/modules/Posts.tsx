@@ -1,9 +1,9 @@
 import React from 'react'
 import moment from 'moment'
 import '../react-app-env.d.ts'
-import '../styles/posts.css'
-import '../styles/posts-compact.css'
-import '../styles/posts-classic.css'
+import '../styles/home/posts.css'
+import '../styles/home/posts-compact.css'
+import '../styles/home/posts-classic.css'
 
 type Props = {
   postStyle: string,

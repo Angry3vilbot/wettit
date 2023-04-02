@@ -1,15 +1,11 @@
 import React, { ReactElement, useEffect, useState } from 'react'
-import '../styles/sidebar.css'
+import '../styles/home/sidebar.css'
 import greenArrow from '../assets/green-arrow.svg'
 import redArrow from '../assets/red-arrow.svg'
 import oceans from '../assets/subwettit-icons/oceans.png'
 import river from '../assets/subwettit-icons/river.png'
 import sea from '../assets/subwettit-icons/sea.webp'
 import placeholderIcon from '../assets/placeholderIcon.png'
-
-interface Props {
-    subwettits: Array<Subwettit>
-}
 
 interface Subwettit extends Object {
     title: String,
@@ -21,7 +17,7 @@ interface Subwettit extends Object {
     creation_date: Date
 }
 
-function Sidebar({ subwettits }: Props) {
+function Sidebar() {
   // Put the rand into a state to stop it from switching on ReRender
   const [rand, setRand] = useState<number>(Math.floor(Math.random() * 3))
   const [newest, setNewest] = useState<Array<Subwettit>>()

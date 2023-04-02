@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import '../styles/feed.css'
+import '../styles/home/feed.css'
 import hotActive from '../assets/hot-active.svg'
 import hotInactive from '../assets/hot-inactive.svg'
 import bestActive from '../assets/best-active.svg'

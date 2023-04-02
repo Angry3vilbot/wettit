@@ -21,7 +21,7 @@ nav {
 }
 
 .logo {
-  background: no-repeat url(../assets/wettit-logo.svg);
+  background: no-repeat url(../../assets/wettit-logo.svg);
   background-size: contain;
   background-position: center center;
   width: 3.5vw;
@@ -30,7 +30,7 @@ nav {
 }
 
 .text-logo {
-  background: no-repeat url(../assets/text-logo.svg);
+  background: no-repeat url(../../assets/text-logo.svg);
   background-size: contain;
   background-position: center center;
   width: 100px;
@@ -38,7 +38,7 @@ nav {
 }
 
 :root.light-mode .text-logo {
-  background: no-repeat url(../assets/text-logo-light.svg);
+  background: no-repeat url(../../assets/text-logo-light.svg);
   background-size: contain;
   background-position: center center;
   width: 100px;
@@ -163,26 +163,26 @@ nav {
 }
 
 .popular-button {
-  background: no-repeat url(../assets/rise-outlined.svg);
+  background: no-repeat url(../../assets/rise-outlined.svg);
   background-size: contain;
   background-position: center center;
 }
 
 .chat-button {
-  background: no-repeat url(../assets/chat-dots.svg);
+  background: no-repeat url(../../assets/chat-dots.svg);
   background-size: contain;
   background-position: center center;
 }
 
 .notification-button {
-  background: no-repeat url(../assets/bell-outline.svg);
+  background: no-repeat url(../../assets/bell-outline.svg);
   background-size: contain;
   background-position: center center;
   margin-left: 5px;
 }
 
 .new-button {
-  background: no-repeat url(../assets/add.svg);
+  background: no-repeat url(../../assets/add.svg);
   background-size: contain;
   background-position: center center;
   margin-left: 5px;
@@ -233,7 +233,7 @@ nav {
   display: inline-block;
   width: 12px;
   height: 12px;
-  background: no-repeat url(../assets/water-drop.svg);
+  background: no-repeat url(../../assets/water-drop.svg);
   background-size: contain;
   background-position: center center;
 }
@@ -249,7 +249,7 @@ nav {
   display: inline-block;
   width: 16px;
   height: 8px;
-  background: no-repeat url(../assets/dropdown-arrow.svg);
+  background: no-repeat url(../../assets/dropdown-arrow.svg);
   background-size: contain;
   background-position: center center;
   align-self: center;
@@ -257,7 +257,7 @@ nav {
 }
 
 :root.light-mode .profile-dropdown {
-  background: no-repeat url(../assets/dropdown-arrow-light.svg);
+  background: no-repeat url(../../assets/dropdown-arrow-light.svg);
   background-size: contain;
   background-position: center center;
 }
@@ -280,7 +280,7 @@ nav {
 }
 
 .profile-dropdown-container .dark-mode-switch-active {
-  background: no-repeat url(../assets/dark-mode.svg);
+  background: no-repeat url(../../assets/dark-mode.svg);
   background-size: contain;
   background-position: center center;
   width: 2rem;
@@ -288,7 +288,7 @@ nav {
 }
 
 .profile-dropdown-container .dark-mode-switch-inactive {
-  background: no-repeat url(../assets/light-mode.svg);
+  background: no-repeat url(../../assets/light-mode.svg);
   background-size: contain;
   background-position: center center;
   width: 2rem;

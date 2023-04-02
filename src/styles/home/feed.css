@@ -45,17 +45,17 @@
   height: 30px;
 }
 .feed-post-style-switch > .card {
-  background: no-repeat url(../assets/card-inactive.svg);
+  background: no-repeat url(../../assets/card-inactive.svg);
   background-size: contain;
   background-position: center center;
 }
 .feed-post-style-switch > .classic {
-  background: no-repeat url(../assets/classicInactive.svg);
+  background: no-repeat url(../../assets/classicInactive.svg);
   background-size: contain;
   background-position: center center;
 }
 .feed-post-style-switch > .compact {
-  background: no-repeat url(../assets/compactInactive.svg);
+  background: no-repeat url(../../assets/compactInactive.svg);
   background-size: contain;
   background-position: center center;
 }
@@ -63,12 +63,12 @@
   display: block;
   width: 16px;
   height: 8px;
-  background: no-repeat url(../assets/dropdown-arrow.svg);
+  background: no-repeat url(../../assets/dropdown-arrow.svg);
   background-size: contain;
   background-position: center center;
 }
 :root.light-mode .feed-post-style-switch > i:nth-of-type(1) {
-  background: no-repeat url(../assets/dropdown-arrow-light.svg);
+  background: no-repeat url(../../assets/dropdown-arrow-light.svg);
   background-size: contain;
   background-position: center center;
 }
@@ -99,32 +99,32 @@
   height: 30px;
 }
 .post-style-dropdown-item:not(.selected):nth-child(1) > i {
-  background: no-repeat url(../assets/card-inactive.svg);
+  background: no-repeat url(../../assets/card-inactive.svg);
   background-size: contain;
   background-position: center center;
 }
 .post-style-dropdown-item:is(.selected):nth-child(1) > i {
-  background: no-repeat url(../assets/card-active.svg);
+  background: no-repeat url(../../assets/card-active.svg);
   background-size: contain;
   background-position: center center;
 }
 .post-style-dropdown-item:not(.selected):nth-child(2) > i {
-  background: no-repeat url(../assets/classicInactive.svg);
+  background: no-repeat url(../../assets/classicInactive.svg);
   background-size: contain;
   background-position: center center;
 }
 .post-style-dropdown-item:is(.selected):nth-child(2) > i {
-  background: no-repeat url(../assets/classicActive.svg);
+  background: no-repeat url(../../assets/classicActive.svg);
   background-size: contain;
   background-position: center center;
 }
 .post-style-dropdown-item:not(.selected):nth-child(3) > i {
-  background: no-repeat url(../assets/compactInactive.svg);
+  background: no-repeat url(../../assets/compactInactive.svg);
   background-size: contain;
   background-position: center center;
 }
 .post-style-dropdown-item:is(.selected):nth-child(3) > i {
-  background: no-repeat url(../assets/compactActive.svg);
+  background: no-repeat url(../../assets/compactActive.svg);
   background-size: contain;
   background-position: center center;
 }
