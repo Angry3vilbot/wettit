@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react'
+import React, { ReactElement, useRef, useState } from 'react'
 import '../styles/modules/navigation.css'
 import home from '../assets/home.svg'
 import dropdownArrow from '../assets/dropdown-arrow.svg'
@@ -6,7 +6,6 @@ import dropdownArrowLight from '../assets/dropdown-arrow-light.svg'
 import searchIcon from '../assets/magnify.svg'
 import verticalSplit from '../assets/vertical-split.svg'
 import profilepicture from '../assets/pfp.png'
-import { useState } from 'react'
 import placeholderIcon from '../assets/placeholderIcon.png'
 
 interface Props {

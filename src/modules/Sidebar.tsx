@@ -7,16 +7,6 @@ import river from '../assets/subwettit-icons/river.png'
 import sea from '../assets/subwettit-icons/sea.webp'
 import placeholderIcon from '../assets/placeholderIcon.png'
 
-interface Subwettit extends Object {
-    title: String,
-    type: String,
-    logo: Buffer,
-    nsfw: Boolean,
-    members: Array<String>,
-    moderators: Array<String>,
-    creation_date: Date
-}
-
 function Sidebar() {
   // Put the rand into a state to stop it from switching on ReRender
   const [rand, setRand] = useState<number>(Math.floor(Math.random() * 3))
